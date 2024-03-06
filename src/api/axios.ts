@@ -21,3 +21,22 @@ export const requests = {
   delete: async <T>(url: string, config?: AxiosRequestConfig) =>
     api.delete<T>(url, config).then(responseBody),
 };
+api.interceptors.response.use(
+  async (response) => {
+    if (typeof response.data === 'string') {
+      try {
+        const decodedString = atob(response.data);
+
+        response.data = JSON.parse(decodedString);
+      } catch (error) {
+        console.error("Error decoding", error);
+      }
+    }
+    
+    console.log(response);
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
