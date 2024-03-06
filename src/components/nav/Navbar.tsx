@@ -21,11 +21,15 @@ export default function Navbar() {
 
             <div className="hidden md:flex items-center space-x-1">
               {constants.navLinks.map((link, index) => (
-              <a href={link.path} key="index" tabIndex={index} className="py-5 px-3 hover:text-gray-400">
-                {link.name}
-              </a>
-                ))}
-      
+                <a
+                  href={link.path}
+                  key={index}
+                  tabIndex={index}
+                  className="py-5 px-3 hover:text-gray-400"
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -55,11 +59,16 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
-      {constants.navLinks.map((link, index) => (
-              <a href={link.path} key="index" tabIndex={index} className="py-5 px-3 hover:text-gray-800">
-                {link.name}
-              </a>
-                ))}
+        {constants.navLinks.map((link, index) => (
+          <a
+            href={link.path}
+            key={index}
+            tabIndex={index}
+            className="py-5 px-3 hover:text-gray-800"
+          >
+            {link.name}
+          </a>
+        ))}
       </div>
     </nav>
   );

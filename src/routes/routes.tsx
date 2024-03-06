@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
         element: <Example />,
         loader: async () => {
           const books = await agent.Books.list();
+          console.log(books)
           return {
             books: books,
           };
