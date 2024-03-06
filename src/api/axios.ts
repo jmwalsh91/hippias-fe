@@ -20,6 +20,4 @@ export const requests = {
     api.put<T>(url, body, config).then(responseBody),
   delete: async <T>(url: string, config?: AxiosRequestConfig) =>
     api.delete<T>(url, config).then(responseBody),
-  deleteWithBody: async <T, B>(url: string, config?: AxiosRequestConfig) =>
-    api.delete<T>(url, config).then(responseBody),
 };

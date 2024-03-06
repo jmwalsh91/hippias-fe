@@ -1,11 +1,11 @@
-import { requests } from "../axios"
+import { requests } from "../axios";
 
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    description: string;
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  description: string;
 }
 export const Books = {
-    list: async () => await requests.get<Book[]>("/books"),
-}
+  list: async () => await requests.get<Book[]>("/list"),
+};
