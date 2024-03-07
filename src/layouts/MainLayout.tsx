@@ -6,8 +6,10 @@ type Props = {
 };
 
 export default function MainLayout({ children }: Props) {
-  return (<div>
-    <Navbar />
-    {children}
-  </div>);
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-black">{children}</div>
+    </div>
+  );
 }
