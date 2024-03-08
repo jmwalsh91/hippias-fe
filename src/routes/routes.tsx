@@ -5,6 +5,7 @@ import Example from "../pages/example/Example";
 import { requests } from "../api/axios";
 import { agent } from "../api/agent";
 import Authors from "@/pages/authors/Authors";
+import AuthorDetails from "@/pages/authors/author/AuthorDetails";
 
 export const router = createBrowserRouter([
   {
@@ -39,14 +40,18 @@ export const router = createBrowserRouter([
         children: [
           {
             path: ":id",
-            element: <Example />,
+            element: <AuthorDetails />,
             loader: async ({ params }) => {
               if (!params.id) return redirect("/authors");
               const id = parseInt(params.id);
-              const author = await agent.Authors.get(id);
+              const [author, books] = await Promise.all([
+                await agent.Authors.get(id),
+                await agent.Books.getBooksByAuthorId(id),
+              ]);
               console.log(author);
               return {
                 author: author,
+                books: books,
               };
             },
           },

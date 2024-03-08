@@ -12,7 +12,7 @@ export default function Example() {
         {books.map((book) => (
           <BookCard
             key={book.id}
-            title={book.Book}
+            title={book.title}
             author={book.Author}
             description={book.description}
           />

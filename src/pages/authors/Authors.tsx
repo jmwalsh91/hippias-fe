@@ -9,13 +9,13 @@ export default function Authors({}: Props) {
   const navigate = useNavigate();
   return (
     <div className="flex">
-      <div className="w-64 bg-gray-200 min-h-screen">
+      <div className="w-64 h-screen overflow-scroll">
         <h1>Authors</h1>
-        <section className="flex flex-col flex-wrap gap-8">
+        <section className="flex flex-col flex-wrap gap-8 p-8">
           {authors.map((author) => (
             <div
               key={author.id}
-              className="flex flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center cursor-default hover:shadow-lg hover:shadow-cyan-500 hover:scale-105 bg-zinc-200 focus:shadow-cyan-500 focus:shadow-xl w-full h-24 "
               onClick={() => navigate(`${author.id}`)}
             >
               <h1>{author.name}</h1>
