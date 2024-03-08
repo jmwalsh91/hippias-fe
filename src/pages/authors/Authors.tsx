@@ -23,7 +23,9 @@ export default function Authors({}: Props) {
           ))}
         </section>
       </div>
-      <Outlet />
+      <div className={"m-8"}>
+        <Outlet />
+      </div>
     </div>
   );
 }
