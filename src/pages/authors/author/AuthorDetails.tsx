@@ -12,7 +12,7 @@ export default function AuthorDetails({}: Props) {
     books: Book[];
   };
   return (
-    <section className={"bg-zinc-300 border-zinc-200 shadow-xl m-8 p-8"}>
+    <section className={"text-zinc-300 border-zinc-200 shadow-cyan-700 shadow-md  m-8 p-8"}>
       <h1 className="text-end text-3xl">{author.name}</h1>
       <p className="text-end text-xl">{author.description}</p>
       <section className="p-24 flex flex-row flex-wrap gap-8">

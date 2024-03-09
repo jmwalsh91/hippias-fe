@@ -1,6 +1,7 @@
 import { Author } from "@/api/methods/Authors";
+import { motion } from "framer-motion";
 import React from "react";
-import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
+import { Outlet, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -8,8 +9,8 @@ export default function Authors({}: Props) {
   const { authors } = useLoaderData() as { authors: Author[] };
   const navigate = useNavigate();
   return (
-    <div className="flex">
-      <div className="w-64 h-screen overflow-scroll">
+    <div className="flex bg-transparent">
+      <div className="w-64 bg-transparent h-screen overflow-scroll">
         <h1>Authors</h1>
         <section className="flex flex-col flex-wrap gap-8 p-8">
           {authors.map((author) => (
@@ -23,9 +24,16 @@ export default function Authors({}: Props) {
           ))}
         </section>
       </div>
-      <div className={"m-8"}>
+      <motion.div
+        key={useLocation().key}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        className="w-full h-full md:col-span-3 sm:overflow-auto relative z-0"
+      >
         <Outlet />
-      </div>
+      </motion.div>
     </div>
   );
 }
