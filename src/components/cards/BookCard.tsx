@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,9 +26,9 @@ export function BookCard({
   cancelOnClick,
 }: Props) {
   return (
-    <Card tabIndex={0} className="w-[350px] bg-slate-100 opacity-95 hover:opacity-100 focus:shadow-cyan-500 focus:shadow-xl hover:shadow-lg hover:shadow-cyan-500 hover:scale-105 hover:transition-all">
+    <Card tabIndex={0} className="w-[350px] text-center text-zinc-300 bg-transparent opacity-95 hover:opacity-100 shadow-md shadow-yellow-200 focus:shadow-cyan-500 focus:shadow-xl hover:shadow-lg hover:shadow-cyan-500 hover:scale-105 ">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-xl">{title}</CardTitle>
         <CardDescription>{author}</CardDescription>
       </CardHeader>
       <CardContent>
