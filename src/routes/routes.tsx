@@ -6,6 +6,8 @@ import { requests } from "../api/axios";
 import { agent } from "../api/agent";
 import Authors from "@/pages/authors/Authors";
 import AuthorDetails from "@/pages/authors/author/AuthorDetails";
+import Courses from "@/pages/courses/Courses";
+import CourseDetails from "@/pages/courses/details/CourseDetails";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +59,30 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/courses",
+        element: <Courses/>,
+        loader: async () => {
+          const courses = await agent.Courses.list();
+          console.log(courses);
+          return {
+            courses: courses,
+          };
+        },
+      },
+      {
+        path: "/courses/:id",
+        element: <CourseDetails/>,
+        loader: async ({ params }) => {
+          if (!params.id) return redirect("/courses");
+          const id = parseInt(params.id);
+          const course = await agent.Courses.get(id);
+          console.log(course);
+          return {
+            course: course,
+          };
+        },
+      }
     ],
   },
 ]);
