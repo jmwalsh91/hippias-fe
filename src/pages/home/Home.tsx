@@ -23,30 +23,39 @@ export default function Home({}: Props) {
       </div>
       <div className="">
         <motion.h2
-          initial={{ scale: 0 }}
-          animate={{
-            scale: [1, 1.1, 1],
-            transition: { duration: 1 },
+          whileInView={{
+            scale: 1.1,
+            x: 100,
+            opacity: 1,
+            transition: {
+              duration: 2,
+              type: "spring",
+            },
           }}
-          className="text-6xl text-center animate-ping-once text-zinc-300"
+          initial={{ opacity: 0 }}
+          className="text-6xl text-center text-zinc-300"
         >
           Explore our courses.{" "}
         </motion.h2>
       </div>
       <HeroParallax products={constants.courseMockForHero} />
       <motion.h2
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 10, 0],
-          transition: { duration: 1 },
+        whileInView={{
+          scale: 1.5,
+          transition: {
+            duration: 1,
+            type: "spring",
+          },
         }}
-        className="text-6xl text-center mb-96 text-zinc-300"
+        className="text-6xl text-center mb-96 text-cyan-300"
       >
         Education. For the future.{" "}
       </motion.h2>
-      <div className="bg-zinc-900 min-h-screen">
+      <h3 className="text-5xl text-center mx-80 mb-40 text-zinc-300">
+      In an era where artificial intelligence is redefining the boundaries of academic integrity, Hippias offers a solution that puts critical thinking and authentic engagement at the forefront of education.
+      </h3>
+      <div className="bg-zinc-900">
         <div className="max-w-4xl mx-auto px-4 py-16">
-  
           <h1 className="text-5xl text-zinc-200 font-bold mb-8">
             Welcome to Hippias
           </h1>

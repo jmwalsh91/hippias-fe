@@ -76,10 +76,11 @@ export const router = createBrowserRouter([
         loader: async ({ params }) => {
           if (!params.id) return redirect("/courses");
           const id = parseInt(params.id);
-          const course = await agent.Courses.get(id);
-          console.log(course);
+          const { course, books, facilitator } = await agent.Courses.GetCourseWithDetails(id);
           return {
             course: course,
+            books: books,
+            facilitator: facilitator,
           };
         },
       }
