@@ -6,9 +6,9 @@ type loginData = {
 };
 export const Auth = {
   login: async (submission: loginData) =>
-    await requests.post("/auth/login", submission),
+    await requests.post("/login", submission),
   register: async (submission: loginData) =>
-    await requests.post("/auth/register", submission),
+    await requests.post("/register", submission),
   user: async () => await requests.get("/auth/user"),
   logout: async () => await requests.post("/logout", {}),
 };
