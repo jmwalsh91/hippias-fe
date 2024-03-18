@@ -10,6 +10,7 @@ import CourseDetails from "@/pages/courses/details/CourseDetails";
 import FacilitatorDashboard from "@/pages/authed/facilitator/FacilitatorDashboard";
 import { Login } from "@/pages/login/Login";
 import CourseManagementDashboard from "@/pages/authed/facilitator/courseMgmt/CourseMgmtDashboard";
+import CreateDiscussion from "@/pages/authed/facilitator/courseMgmt/discussionMgmt/CreateDiscussion";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +131,28 @@ export const router = createBrowserRouter([
             discussions: discussions,
             participants: participants,
           };
+        },
+      },
+      {
+        path: "/fac/course/:id/discussion/new",
+        element: <CreateDiscussion />,
+        action: async ({ request, params }) => {
+          const courseId = params.id;
+          if (!courseId) return redirect("/fac");
+          const formValues = Object.fromEntries(
+            (await request.formData()).entries()
+          );
+          const submission = {
+            name: formValues.title as string,
+            description: formValues.description as string,
+            course_id: parseInt(courseId),
+            date_time: formValues.dateTime as string,
+
+          };
+          await agent.Discussions.create(submission).then((res) => {
+            redirect(`/fac/course/${courseId}/discussion/${res.id}`);
+          })
+          return redirect(`/fac/course/${params.id}`);
         },
       },
     ],

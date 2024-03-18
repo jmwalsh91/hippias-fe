@@ -18,13 +18,24 @@ export interface Discussion {
   date_time: string;
 }
 
+export interface DiscussionCreateSubmission {
+  course_id: number;
+  name: string;
+  description: string;
+  date_time: string;
+}
+
 export const Discussions = {
   list: async () => await requests.get<Discussion[]>("/discussions"),
   get: async (id: number) =>
     await requests.get<Discussion>(`/discussions/${id}`),
-  create: async (submission: Discussion) =>
-    await requests.post("/discussions", submission),
+  create: async (submission: DiscussionCreateSubmission) =>
+    await requests.post<Discussion, DiscussionCreateSubmission>("/discussions", submission),
   update: async (submission: Discussion) =>
     await requests.put(`/discussions/${submission.id}`, submission),
   delete: async (id: number) => await requests.delete(`/discussions/${id}`),
+  mgmt: {
+    getDiscussionMgmtDetails: async (id: number) =>
+      await requests.get<Discussion>(`/discussions/${id}/management`),
+  },
 };

@@ -1,6 +1,12 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { CourseMgmtDto } from "@/types/types";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 export default function CourseManagementDashboard() {
   const { course, discussions, participants } =
@@ -18,7 +24,12 @@ export default function CourseManagementDashboard() {
 
         <Card className="col-span-1 md:col-span-2">
           <CardHeader>
-            <CardTitle className="text-xl">Discussions</CardTitle>
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-xl">Discussions</CardTitle>
+              <Link to="discussion/new" className="text-blue-500 hover:text-blue-600">
+                Create Discussion
+              </Link>
+            </div>
           </CardHeader>
           <CardContent>
             {discussions &&
@@ -29,6 +40,11 @@ export default function CourseManagementDashboard() {
                 </div>
               ))}
           </CardContent>
+          <CardFooter>
+            <a href="#" className="text-blue-500 hover:text-blue-600">
+              View All Discussions
+            </a>
+          </CardFooter>
         </Card>
 
         <Card className="col-span-1 md:col-span-4">
