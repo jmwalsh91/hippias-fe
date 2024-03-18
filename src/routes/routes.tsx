@@ -7,9 +7,9 @@ import Authors from "@/pages/authors/Authors";
 import AuthorDetails from "@/pages/authors/author/AuthorDetails";
 import Courses from "@/pages/courses/Courses";
 import CourseDetails from "@/pages/courses/details/CourseDetails";
-import { Facilitator } from "@/api/methods/Facilitator";
 import FacilitatorDashboard from "@/pages/authed/facilitator/FacilitatorDashboard";
 import { Login } from "@/pages/login/Login";
+import CourseManagementDashboard from "@/pages/authed/facilitator/courseMgmt/CourseMgmtDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +115,21 @@ export const router = createBrowserRouter([
         element: <FacilitatorDashboard />,
         loader: async () => {
           return null;
+        },
+      },
+      {
+        path: "/fac/course/:id",
+        element: <CourseManagementDashboard />,
+        loader: async ({ params }) => {
+          if (!params.id) return redirect("/fac");
+          const id = parseInt(params.id);
+          const { course, discussions, participants } =
+            await agent.Courses.mgmt.getCourseMgmtDetails(id);
+          return {
+            course: course,
+            discussions: discussions,
+            participants: participants,
+          };
         },
       },
     ],

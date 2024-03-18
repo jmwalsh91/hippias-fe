@@ -1,3 +1,4 @@
+import { CourseMgmtDto } from "@/types/types";
 import { requests } from "../axios";
 import { Book } from "./Books";
 import { Facilitator } from "./Facilitator";
@@ -15,13 +16,13 @@ type Course struct {
 */
 
 export interface Course {
-    id: number;
-    facilitatorId: number;
-    title: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-    photo_url: string;
+  id: number;
+  facilitatorId: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  photo_url: string;
 }
 
 export const Courses = {
@@ -34,4 +35,8 @@ export const Courses = {
       books: Book[];
       facilitator: Facilitator;
     }>(`/courses/details/${id}`),
+  mgmt: {
+    getCourseMgmtDetails: async (id: number) =>
+      await requests.get<CourseMgmtDto>(`/courses/${id}/management`),
+  },
 };
