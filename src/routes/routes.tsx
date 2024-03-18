@@ -2,12 +2,15 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/home/Home";
 import Example from "../pages/example/Example";
-import { requests } from "../api/axios";
 import { agent } from "../api/agent";
 import Authors from "@/pages/authors/Authors";
 import AuthorDetails from "@/pages/authors/author/AuthorDetails";
 import Courses from "@/pages/courses/Courses";
 import CourseDetails from "@/pages/courses/details/CourseDetails";
+import FacilitatorDashboard from "@/pages/authed/facilitator/FacilitatorDashboard";
+import { Login } from "@/pages/login/Login";
+import CourseManagementDashboard from "@/pages/authed/facilitator/courseMgmt/CourseMgmtDashboard";
+import CreateDiscussion from "@/pages/authed/facilitator/courseMgmt/discussionMgmt/CreateDiscussion";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +20,29 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+        action: async ({ request }) => {
+          const formValues = Object.fromEntries(
+            (await request.formData()).entries()
+          );
+          const submission = {
+            email: formValues.email as string,
+            password: formValues.password as string,
+          };
+          switch (formValues.target) {
+            case "login":
+              await agent.Auth.login(submission);
+              return;
+            case "register":
+              await agent.Auth.register(submission);
+              return;
+            default:
+              return redirect("/login");
+          }
+        },
       },
       {
         path: "/about",
@@ -61,7 +87,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/courses",
-        element: <Courses/>,
+        element: <Courses />,
         loader: async () => {
           const courses = await agent.Courses.list();
           console.log(courses);
@@ -72,17 +98,63 @@ export const router = createBrowserRouter([
       },
       {
         path: "/courses/:id",
-        element: <CourseDetails/>,
+        element: <CourseDetails />,
         loader: async ({ params }) => {
           if (!params.id) return redirect("/courses");
           const id = parseInt(params.id);
-          const course = await agent.Courses.get(id);
-          console.log(course);
+          const { course, books, facilitator } =
+            await agent.Courses.GetCourseWithDetails(id);
           return {
             course: course,
+            books: books,
+            facilitator: facilitator,
           };
         },
-      }
+      },
+      {
+        path: "/fac/",
+        element: <FacilitatorDashboard />,
+        loader: async () => {
+          return null;
+        },
+      },
+      {
+        path: "/fac/course/:id",
+        element: <CourseManagementDashboard />,
+        loader: async ({ params }) => {
+          if (!params.id) return redirect("/fac");
+          const id = parseInt(params.id);
+          const { course, discussions, participants } =
+            await agent.Courses.mgmt.getCourseMgmtDetails(id);
+          return {
+            course: course,
+            discussions: discussions,
+            participants: participants,
+          };
+        },
+      },
+      {
+        path: "/fac/course/:id/discussion/new",
+        element: <CreateDiscussion />,
+        action: async ({ request, params }) => {
+          const courseId = params.id;
+          if (!courseId) return redirect("/fac");
+          const formValues = Object.fromEntries(
+            (await request.formData()).entries()
+          );
+          const submission = {
+            name: formValues.title as string,
+            description: formValues.description as string,
+            course_id: parseInt(courseId),
+            date_time: formValues.dateTime as string,
+
+          };
+          await agent.Discussions.create(submission).then((res) => {
+            redirect(`/fac/course/${courseId}/discussion/${res.id}`);
+          })
+          return redirect(`/fac/course/${params.id}`);
+        },
+      },
     ],
   },
 ]);
