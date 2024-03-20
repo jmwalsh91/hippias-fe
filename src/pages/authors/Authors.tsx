@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Outlet, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 
-type Props = {};
 
-export default function Authors({}: Props) {
+
+export default function Authors() {
   const { authors } = useLoaderData() as { authors: Author[] };
   const navigate = useNavigate();
   return (

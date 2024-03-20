@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import NotificationCard from "./components/NotificationCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-type Props = {};
 
 const notifications = [
   {

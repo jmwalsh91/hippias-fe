@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Button,
-} from "@shadcn/ui";
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useParams, Link, useLoaderData } from "react-router-dom";
+
 
 interface Discussion {
   id: number;
@@ -21,7 +13,7 @@ interface Discussion {
 
 export default function DiscussionMgmt() {
   const { courseId } = useParams<{ courseId: string }>();
-  const [discussions, setDiscussions] = useState<Discussion[]>([]);
+  const { discussions } = useLoaderData() as { discussions: Discussion[] };
 
   return (
     <div>
@@ -57,7 +49,6 @@ export default function DiscussionMgmt() {
                 </Link>
                 <Button
                   variant="destructive"
-                  onClick={() => handleDeleteDiscussion(discussion.id)}
                 >
                   Delete
                 </Button>
