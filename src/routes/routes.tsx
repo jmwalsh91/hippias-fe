@@ -126,12 +126,15 @@ export const router = createBrowserRouter([
           const id = parseInt(params.id);
           const { course, discussions, participants } =
             await agent.Courses.mgmt.getCourseMgmtDetails(id);
-          return {
+
+          const courseDto = {
             course: course,
             discussions: discussions,
             participants: participants,
           };
-        },
+          console.log(courseDto);
+          return courseDto
+        }
       },
       {
         path: "/fac/course/:id/discussion/new",
