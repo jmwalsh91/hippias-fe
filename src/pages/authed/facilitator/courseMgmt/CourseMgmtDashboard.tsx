@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { CourseMgmtDto } from "@/types/types";
 import { Link, useLoaderData } from "react-router-dom";
+import CourseDiscussionsAccordion from "./components/CourseDiscussionsAccordion";
 
 export default function CourseManagementDashboard() {
   const { course, discussions, participants } =
@@ -24,38 +25,6 @@ export default function CourseManagementDashboard() {
 
         <Card className="col-span-1 md:col-span-2">
           <CardHeader>
-            <div className="flex justify-between items-center">
-              <CardTitle className="text-xl">Discussions</CardTitle>
-              <Link to="discussion/new" className="text-blue-500 hover:text-blue-600">
-                Create Discussion
-              </Link>
-            </div>
-          </CardHeader>
-          <CardContent>
-            {discussions &&
-              discussions.map((discussion) => (
-                <div key={discussion.id}>
-                  <h3>{discussion.name}</h3>
-                  {discussion.description}
-                </div>
-              ))}
-          </CardContent>
-          <CardFooter>
-            <a href="#" className="text-blue-500 hover:text-blue-600">
-              View All Discussions
-            </a>
-          </CardFooter>
-        </Card>
-
-        <Card className="col-span-1 md:col-span-4">
-          <CardHeader>
-            <CardTitle className="text-xl">Readings</CardTitle>
-          </CardHeader>
-          <CardContent>Filler</CardContent>
-        </Card>
-
-        <Card className="col-span-1 md:col-span-4">
-          <CardHeader>
             <CardTitle className="text-xl">Participants</CardTitle>
           </CardHeader>
           <CardContent>
@@ -67,6 +36,35 @@ export default function CourseManagementDashboard() {
                 </div>
               ))}
           </CardContent>
+        </Card>
+
+        <Card className="col-span-1 md:col-span-4">
+          <CardHeader>
+            <CardTitle className="text-xl">Readings</CardTitle>
+          </CardHeader>
+          <CardContent>Filler</CardContent>
+        </Card>
+
+        <Card className="col-span-1 md:col-span-4">
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-xl">Discussions</CardTitle>
+              <Link
+                to="discussion/new"
+                className="text-blue-500 hover:text-blue-600"
+              >
+                Create Discussion
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <CourseDiscussionsAccordion discussions={discussions} />
+          </CardContent>
+          <CardFooter>
+            <a href="#" className="text-blue-500 hover:text-blue-600">
+              View All Discussions
+            </a>
+          </CardFooter>
         </Card>
       </div>
     </div>
