@@ -34,7 +34,7 @@ export default function CreateDiscussion({}: Props) {
             id="date"
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={(day) => setDate(day)}
             className="rounded-md border"
             required
           />

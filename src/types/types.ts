@@ -1,7 +1,6 @@
 import { Course } from "@/api/methods/Courses";
 import { DiscussionAttendance } from "@/api/methods/DiscussionAttendance";
 import { Discussion } from "@/api/methods/Discussions";
-import { ReadingRating } from "@/api/methods/ReadingRatings";
 import { Reading } from "@/api/methods/Readings";
 
 
@@ -17,10 +16,9 @@ import { Reading } from "@/api/methods/Readings";
     userId: number;
   }
 
-interface DiscussionDto {
+export interface DiscussionDto {
     discussion: Discussion;
     readings: Reading[];
-    ratings: ReadingRating[];
     attendance: DiscussionAttendance[];
   }
   
@@ -30,6 +28,6 @@ interface DiscussionDto {
   }
   export interface CourseMgmtDto {
     course: Course;
-    discussions: DiscussionDto[];
+    discussions: Discussion[];
     participants: CourseParticipantDto[];
   }

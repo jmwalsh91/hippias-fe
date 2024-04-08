@@ -34,9 +34,9 @@ export default function CourseManagementDashboard() {
           <CardContent>
             {discussions &&
               discussions.map((discussion) => (
-                <div key={discussion.discussion.id}>
-                  <h3>{discussion.discussion.name}</h3>
-                  {discussion.discussion.description}
+                <div key={discussion.id}>
+                  <h3>{discussion.name}</h3>
+                  {discussion.description}
                 </div>
               ))}
           </CardContent>
