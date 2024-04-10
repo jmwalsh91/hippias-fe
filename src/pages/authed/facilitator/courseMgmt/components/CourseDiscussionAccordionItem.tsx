@@ -14,7 +14,7 @@ export default function CourseDiscussionAccordionItem({ discussion }: Props) {
   return (
     <AccordionItem value={"item-" + discussion.id}>
       <AccordionTrigger>
-        <h3 className="text-lg">{discussion.name}</h3>
+        <h3 className="text-lg text-bold">{discussion.name}</h3>
       </AccordionTrigger>
       <AccordionContent>
         <p className="text-lg">{discussion.description}</p>
