@@ -11,6 +11,7 @@ import NotificationCard from "./components/NotificationCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useLoaderData } from "react-router-dom";
 import { Course } from "@/api/methods/Courses";
+import EnrollmentChart from "./components/charts/EnrollmentChart";
 
 const notifications = [
   {
@@ -58,7 +59,7 @@ export default function FacilitatorDashboard({}: Props) {
           </CardHeader>
           <CardContent className="flex flex-col justify-center items-center h-full">
             <p className="text-gray-400 text-lg">Your Dashboard</p>
-            {/* Add your main dashboard content here */}
+            <EnrollmentChart />
           </CardContent>
           <CardFooter>{/* Add any footer content or actions */}</CardFooter>
         </Card>
