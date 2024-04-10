@@ -115,7 +115,11 @@ export const router = createBrowserRouter([
         path: "/fac/",
         element: <FacilitatorDashboard />,
         loader: async () => {
-          return null;
+          const courses = await agent.Courses.list();
+          console.log(courses);
+          return {
+            courses: courses,
+          };
         },
       },
       {

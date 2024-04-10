@@ -9,7 +9,9 @@ import {
 import { Button } from "@/components/ui/button";
 import NotificationCard from "./components/NotificationCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { useLoaderData } from "react-router-dom";
+import { Course } from "@/api/methods/Courses";
+import EnrollmentChart from "./components/charts/EnrollmentChart";
 
 const notifications = [
   {
@@ -47,6 +49,7 @@ const notifications = [
 ];
 
 export default function FacilitatorDashboard({}: Props) {
+  const { courses } = useLoaderData() as { courses: Course[] };
   return (
     <div className="bg-gray-900 min-h-screen p-4">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -56,7 +59,7 @@ export default function FacilitatorDashboard({}: Props) {
           </CardHeader>
           <CardContent className="flex flex-col justify-center items-center h-full">
             <p className="text-gray-400 text-lg">Your Dashboard</p>
-            {/* Add your main dashboard content here */}
+            <EnrollmentChart />
           </CardContent>
           <CardFooter>{/* Add any footer content or actions */}</CardFooter>
         </Card>
@@ -66,7 +69,19 @@ export default function FacilitatorDashboard({}: Props) {
             <CardTitle className="text-xl">Upcoming Courses</CardTitle>
           </CardHeader>
           <CardContent>
-            {/* Add a list or grid of upcoming courses */}
+            <ScrollArea className="h-96">
+              {courses.map((course) => (
+                <Card
+                  key={course.id}
+                  className="items-center m-4"
+                >
+                  <CardHeader className="text-lg text-bold">{course.title}</CardHeader>
+                  <CardContent>
+                    <p>{course.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </ScrollArea>
           </CardContent>
           <CardFooter>
             <a href="#" className="text-blue-500 hover:text-blue-600">
